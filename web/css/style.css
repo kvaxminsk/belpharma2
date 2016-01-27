@@ -1,0 +1,402 @@
+#container{
+    margin: 0 auto;
+    background-image: url("../img/bckg.jpg");
+    background-position: center;
+    width: 100%;
+    min-width: 1310px;
+}
+
+@font-face {
+    font-family: "ProximaNovaRegular";
+    src: url("../fonts/regular/ProximaNovaRegular.eot");
+    src: url("../fonts/regular/ProximaNovaRegular.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/regular/ProximaNovaRegular.woff") format("woff"),
+    url("../fonts/regular/ProximaNovaRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "ProximaNovaBold";
+    src: url("../fonts/bold/ProximaNovaBold.eot");
+    src: url("../fonts/bold/ProximaNovaBold.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/bold/ProximaNovaBold.woff") format("woff"),
+    url("../fonts/bold/ProximaNovaBold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+
+
+body{
+    margin: 0;
+    font-family: "ProximaNovaBold", Arial;
+}
+
+.regular{
+    font-family: "ProximaNovaRegular", Arial;
+}
+
+#header{
+    background-image: url("../img/top-bckg.png");
+    background-position: top center;
+    background-size: 100%;
+    height: 160px;
+    background-repeat: no-repeat;
+    padding-top: 20px;
+}
+a span{
+    color: rgb(124,124,128);
+    font-size: 24px;
+}
+
+#title-name{
+    color: rgb(0,141,57);
+    font-size: 42px;
+}
+
+#header a{
+    display: block;
+    width: 415px;
+    margin: 0 auto;
+    text-decoration: none;
+}
+
+#header img{
+    vertical-align: top;
+}
+
+#logo-content{
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 10px 0 0 15px;
+}
+
+#pharm-info{
+    color: #ffffff;
+    text-align: center;
+    width: 320px;
+    display: inline-block;
+    margin-right: 50px;
+    margin-top: 270px;
+}
+
+#pharm-info p{
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.text-uppercase{
+    text-transform: uppercase;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.huge{
+    font-size: 36px;
+    font-weight: normal;
+    line-height: normal;
+}
+
+.white-line{
+    width: 50px;
+    border: solid #ffffff 1px;
+    border-radius: 10px;
+    margin: 10px auto;
+}
+
+#contacts{
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.5;
+}
+
+#form{
+    width: 340px;
+    padding: 60px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    color: rgb(52,52,52);
+    margin-bottom: 60px;
+    margin-top: 30px;
+}
+
+#content{
+    width: 835px;
+    margin: 0 auto;
+}
+
+#enter, #register{
+    padding: 5px 20px;
+    border: solid rgb(0,141,71) 2px;
+    border-radius: 20px;
+    color: rgb(52,52,52);
+    text-decoration: none;
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+#register, .dotted{
+    border: none;
+    border-bottom: dotted rgb(0,141,71) 1px;
+    border-radius: 0;
+    padding: 1px 0;
+    margin-left: 10px;
+    text-transform: uppercase;
+}
+
+.bottom{
+    font-size: 14px;
+}
+
+#enter:hover{
+    background-color: rgb(0,141,71);
+    transition: 0.3s;
+}
+
+#form-name{
+    font-size: 30px;
+    text-transform: uppercase;
+    margin: 75px 0;
+}
+
+input{
+    padding: 10px 50px;
+    border-radius: 25px;
+    border: solid rgb(0,141,71) 2px;
+    width: 190px;
+    height: 25px;
+    font-size: 18px;
+}
+
+label{
+    display: block;
+    text-align: left;
+    margin-left: 25px;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+}
+
+#loginform-username{
+     margin-bottom: 14px;
+     background: url("../img/user.png") no-repeat 20px 15px;
+ }
+
+#loginform-password{
+    margin-bottom: 30px;
+    background: url("../img/pass.png") no-repeat 20px 15px;
+    background-color: rgb(0,141,71);
+    color: #ffffff;
+    font-size: 26px;
+}
+
+input:focus{
+    outline: none;
+}
+
+#rememberme-label{
+    display: inline;
+    margin: 0;
+    text-align: left;
+    vertical-align: middle;
+    float: left;
+    margin: 4px 20px;
+}
+
+#loginform-rememberme{
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    width: 25px;
+    height: 25px;
+    float: left;
+    margin-right: 25px;
+}
+
+.label-checkbox{
+	position:relative;
+	top: 15px;
+}
+
+#forgot{
+	text-transform: uppercase;
+	position: relative;
+	top: 5px;
+}
+
+#return{
+	position: relative;
+	top: 5px;
+}
+
+button:focus{
+    outline: none;
+}
+
+#footer-el a{
+    display: block;
+}
+
+button{
+    display: block;
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: uppercase;
+    background-color: rgb(89,170,58);
+    padding: 12px 60px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 60px auto;
+
+}
+
+
+
+.help-block{
+	font-family: "ProximaNovaRegular", Arial;
+    font-size: 12px;
+    color: red;
+    margin-bottom: 10px;
+}
+
+
+.clearfix{
+    clear: both;
+}
+
+#forgot, #return{
+    text-decoration: none;
+    color: rgb(52,52,52);
+}
+
+#forgot{
+    margin-right: 40px;
+}
+
+#return img{
+    margin-right: 7px;
+}
+
+
+
+
+img{
+    border: none;
+}
+
+
+
+#footer{
+    background-image: url("../img/bottom-bckg.png");
+    background-position: bottom center;
+    background-size: 100%;
+    height: 160px;
+    background-repeat: no-repeat;
+}
+
+.footer-el{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 50px;
+}
+
+.footer-el p{
+    display: inline-block;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-left: 20px;
+    position: relative;
+    bottom: 10px;
+    color: rgb(52,52,52);
+    margin-right: 30px;
+}
+
+.footer-el .last-el{
+    margin-right: 0;
+}
+.footer-el img{
+    margin-top: 30px;
+}
+
+#reloading{
+    width: 840px;
+    margin: 0 auto;
+}
+
+#footer-info{
+    height: 40px;
+    background-color: rgb(230,230,230);
+    font-size: 14px;
+    padding: 10px 0;
+}
+
+#footer-info a{
+    color: rgb(52,52,52);
+    text-decoration: none;
+}
+
+#footer-info span{
+    margin-right: 30px;
+    margin-top: 5px;
+}
+
+#reactive{
+    border-bottom: dotted rgb(52,52,52) 1px;
+    margin-right: 40px;
+}
+
+#footer-info img{
+    position: relative;
+    top: 10px;
+
+}
+
+#footer-info-content span{
+    margin-right: 130px;
+}
+
+#footer-info-content .last{
+    margin-right: 0;
+}
+
+#footer-info-content{
+    width: 990px;
+    margin: 0 auto;
+}
+
+
+.last-el{
+    margin-right: 0;
+}
+
+@media (min-width: 1700px) and  (max-width: 1920px){
+
+    .footer-el p {
+        margin-right: 100px;
+    }
+
+    #reloading{
+        width: 980px;
+    }
+
+    .footer-el {
+        margin-top: 30px;
+    }
+
+    .footer-el a{
+        display: block;
+    }
+
+    .footer-el .last-el{
+        margin-right: 0;
+    }
+}

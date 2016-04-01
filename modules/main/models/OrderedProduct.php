@@ -10,7 +10,7 @@ use app\modules\main\models\Products;
  * This is the model class for table "ordered_product".
  *
  * @property integer $id
- * @property string $kpr
+
  * @property string $imn
  * @property string $otd
  * @property integer $kolz
@@ -19,6 +19,8 @@ use app\modules\main\models\Products;
  * @property integer $status
  * @property integer $order_id
  * @property integer $user_id
+ * @property integer $kodpart
+ * @property integer $kpr
  */
 class OrderedProduct extends \yii\db\ActiveRecord
 {
@@ -48,6 +50,7 @@ class OrderedProduct extends \yii\db\ActiveRecord
             //[['kpr', 'imn', 'otd', 'kolz', 'dsv', 'buggod', 'status'], 'required'],
             [['kolz', 'buggod', 'status', 'user_id', 'order_id', 'otd'], 'integer'],
             [['kpr'], 'string', 'max' => 7],
+            [['kodpart'], 'string', 'max' => 7],
             [['imn', 'dsv'], 'string', 'max' => 255],
         ];
     }
@@ -59,7 +62,7 @@ class OrderedProduct extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'kpr' => 'Код лекарственного средства',
+//            'kpr' => 'Код лекарственного средства',
             'imn' => 'Наименование лекарственного средства',
             'otd' => 'Отдел склада',
             'kolz' => 'Заказанное количество',
@@ -68,6 +71,7 @@ class OrderedProduct extends \yii\db\ActiveRecord
             'status' => 'Статус',
             'user_id' => 'ID контрагента в приложении',
             'order_id' => 'Номер заказа',
+            'kodpart' => 'Код партии товара',
             //'product_id' => 'Номер товара в БД веб-приложения',
         ];
     }
@@ -83,7 +87,7 @@ class OrderedProduct extends \yii\db\ActiveRecord
      */
     public function getWholesalePrice()
     {
-        $price = Products::findOne(['kpr' => $this->kpr, 'otd' => $this->otd, 'namepr' => $this->dsv]);
+        $price = Products::findOne(['kodpart' => $this->kodpart, 'otd' => $this->otd, 'namepr' => $this->dsv]);
         if(isset($price)) {
             return $price->cenopt;
         } else {
@@ -109,7 +113,7 @@ class OrderedProduct extends \yii\db\ActiveRecord
      */
     public function getIsProduct()
     {
-        $condition = ['kpr' => $this->kpr, 'otd' => $this->otd, 'namepr' => $this->dsv];
+        $condition = ['kodpart' => $this->kodpart, 'otd' => $this->otd, 'namepr' => $this->dsv];
         $productModel = Products::findOne($condition);
         if(!empty($productModel)) { 
             return true; 

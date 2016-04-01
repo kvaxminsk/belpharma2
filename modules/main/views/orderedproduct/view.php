@@ -34,7 +34,7 @@ if(Yii::$app->user->identity->role == 2) {
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'kpr',
+            'kodpart',
             'imn',
             'otd',
             'kolz',

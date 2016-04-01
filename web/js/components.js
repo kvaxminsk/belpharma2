@@ -25,10 +25,10 @@ $('.quont-plus').click(function () {
 });
 $('.add-product').click(function () {
     var id = $(this).parent().find('input.id').val();
-    var kpr = $(this).parent().find('input.kpr').val();
+    var kodpart = $(this).parent().find('input.kodpart').val();
     var kol = $(this).parent().find('input.kol').val();
     $.ajax({
-        url: '/main/orderedproduct/add-to-product?id=' + kpr,
+        url: '/main/orderedproduct/add-to-product?id=' + kodpart,
         type: 'POST',
         data: {
             'id': id,
@@ -54,10 +54,10 @@ $('.add-the-product').click(function () {
     var pathname = window.location.pathname;
     var orderId = pathname.split('/').pop();
     var id = $(this).parent().find('input.id').val();
-    var kpr = $(this).parent().find('input.kpr').val();
+    var kodpart = $(this).parent().find('input.kodpart').val();
     var kol = $(this).parent().find('input.kol').val();
     $.ajax({
-        url: '/main/orderedproduct/add-to-product-for-order?id=' + kpr + '&orderId=' + orderId,
+        url: '/main/orderedproduct/add-to-product-for-order?id=' + kodpart + '&orderId=' + orderId,
         type: 'POST',
         data: {
             'id': id,

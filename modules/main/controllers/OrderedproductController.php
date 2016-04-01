@@ -39,8 +39,9 @@ class OrderedproductController extends Controller
 
     public function actionAdd($id)
     {
-        $product = Products::findOne(['kpr' => $id]);
+        $product = Products::findOne(['kodpart' => $id]);
         $model = new OrderedProduct();
+        $model->kodpart = $product->kodpart;
         $model->kpr = $product->kpr;
         $model->imn = $product->tn;
         $model->otd = $product->otd;
@@ -55,7 +56,7 @@ class OrderedproductController extends Controller
             $model->trigger(self::EVENT_ADD_PRODUCT_TO_ORDER, $event);
             if($model->save())
             {
-                Yii::$app->session->setFlash('success', 'Товар с кодом: ' . $model->kpr . ' успешно прикреплен к заявке. Просмотреть список товаров в заявке можно по следующей' . Html::a('', ''));
+                Yii::$app->session->setFlash('success', 'Товар с кодом: ' . $model->kodpart . ' успешно прикреплен к заявке. Просмотреть список товаров в заявке можно по следующей' . Html::a('', ''));
             
                 return $this->redirect(['/main/products']);
             }
@@ -74,14 +75,15 @@ class OrderedproductController extends Controller
      */
     public function actionAddToProduct($id)
     {
-        $product = Products::findOne(['kpr' => $id]);
+        $product = Products::findOne(['kodpart' => $id]);
         $model = OrderedProduct::findOne([
-            'kpr' => $id, 
+            'kodpart' => $id,
             'user_id' => Yii::$app->user->getId(), 
             'order_id' => Yii::$app->session->get('idOrder')
             ]);
         if(empty($model)) {
             $model = new OrderedProduct();
+            $model->kodpart = $product->kodpart;
             $model->kpr = $product->kpr;
             $model->imn = $product->tn;
             $model->otd = $product->otd;
@@ -114,15 +116,15 @@ class OrderedproductController extends Controller
      */
     public function actionAddToProductForOrder($id, $orderId)
     {
-        $product = Products::findOne(['kpr' => $id]);
+        $product = Products::findOne(['kodpart' => $id]);
         $model = OrderedProduct::findOne([
-            'kpr' => $id, 
+            'kodpart' => $id,
             'user_id' => Yii::$app->user->getId(), 
             'order_id' => $orderId,
             ]);
         if(empty($model)) {
             $model = new OrderedProduct();
-            $model->kpr = $product->kpr;
+            $model->kodpart = $product->kodpart;
             $model->imn = $product->tn;
             $model->otd = $product->otd;
             $model->dsv = $product->namepr;
@@ -390,7 +392,7 @@ class OrderedproductController extends Controller
         $response = array();
         foreach ($products as $product) {
             $response [] = [
-                'kpr' => $product->kpr,
+                'kodpart' => $product->kodpart,
                 'kolz' => $product->kolz,
             ];
         }
@@ -404,7 +406,7 @@ class OrderedproductController extends Controller
         $response = array();
         foreach ($products as $product) {
             $response [] = [
-                'kpr' => $product->kpr,
+                'kodpart' => $product->kodpart,
                 'kolz' => $product->kolz,
             ];
         }

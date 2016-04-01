@@ -36,12 +36,12 @@ $this->params['menu'] = 4;
         'filterModel' => $searchModel,
         'columns' => [
             
-            'kpr',
+            'kodpart',
             'imn',
             [
                 'label' => 'Форма выпуска',
                 'value' => function ($model, $key, $index, $column) {
-                    $product = app\modules\main\models\Products::findOne(['kpr' => $model->kpr]);
+                    $product = app\modules\main\models\Products::findOne(['kodpart' => $model->kodpart]);
                     if(isset($product)) {
                         return $product->nshort3;
                     } else {

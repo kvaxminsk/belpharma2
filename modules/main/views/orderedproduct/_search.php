@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'kpr') ?>
+    <?= $form->field($model, 'kodpart') ?>
 
     <?= $form->field($model, 'imn') ?>
 

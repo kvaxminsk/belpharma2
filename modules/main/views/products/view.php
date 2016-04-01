@@ -65,9 +65,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= Html::a('<  Вернутся к списку товаров', ['index'], ['class' => 'btn btn-primary']) ?>
     <?php if(Yii::$app->user->identity->role != 1) { ?>
     <?php if(Yii::$app->session->get('creatingOrder') == 1) { ?>
-            <?= Html::a('Добавить к заказу', Url::toRoute(['/main/orderedproduct/add', 'id' => $model->kpr]), ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Добавить к заказу', Url::toRoute(['/main/orderedproduct/add', 'id' => $model->kodpart]), ['class' => 'btn btn-primary']) ?>
     <?php } else { ?>
-            <?= Html::a('Создать новый заказ и добавить в него товар', Url::toRoute(['/main/orderedproduct/add', 'id' => $model->kpr]), ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Создать новый заказ и добавить в него товар', Url::toRoute(['/main/orderedproduct/add', 'id' => $model->kodpart]), ['class' => 'btn btn-primary']) ?>
     <?php } ?>
     <?php } ?>
 </div>

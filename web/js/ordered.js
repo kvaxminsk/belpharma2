@@ -4,7 +4,7 @@ $(document).ready(function () {
         dataType: 'json',
         success: function(data, statusText, jqXHR) {
             for(var i=0; i<data.length; i++) {
-                var input = $('[value="' + data[i].kpr + '"]');
+                var input = $('[value="' + data[i].kodpart + '"]');
                 var divs = input.parent().parent();
                 var notordered = divs.find('.product.notordered');
                 var ordered = divs.find('.product.ordered');

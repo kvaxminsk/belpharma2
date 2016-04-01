@@ -7,7 +7,7 @@ use app\modules\user\models\User;
 /* @var $this yii\web\View */
 /* @var $model app\modules\main\models\OrderedProduct */
 
-$this->title = 'Редактирование товара с кодом ' . $model->kpr;
+$this->title = 'Редактирование товара с кодом ' . $model->kodpart;
 if(Yii::$app->user->identity->role == 2) {
     $this->params['breadcrumbs'][] = ['label' => 'Прикрепленные к заказу товары', 'url' => ['checkout']];
     $this->params['breadcrumbs'][] = ['label' => 'Наименование: "' . $model->imn . '"', 'url' => ['view', 'id' => $model->id]];
@@ -30,7 +30,7 @@ if(Yii::$app->user->identity->role == 2) {
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'kpr',
+            'kodpart',
             'imn',
             'otd',
             'dsv',

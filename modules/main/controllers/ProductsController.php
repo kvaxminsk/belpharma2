@@ -93,9 +93,9 @@ class ProductsController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $ordered = OrderedProduct::findOne($id);
-        $kpr = $ordered->kpr;
+        $kodpart = $ordered->kodpart;
         $namepr = $ordered->dsv;//Имя производителя в модели Products и OrderedProduct
-        $model = Products::findOne(['kpr' => $kpr, 'namepr' => $namepr]);
+        $model = Products::findOne(['kodpart' => $kodpart, 'namepr' => $namepr]);
         if(!empty($model)) {
             return $model->attributes;
         } else {

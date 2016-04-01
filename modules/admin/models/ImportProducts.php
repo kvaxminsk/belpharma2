@@ -205,8 +205,6 @@ class ImportProducts extends \yii\db\ActiveRecord
                     }
 
                 }
-//                var_dump($product);
-//                die('fff33fff1111331');
                 if($product->save()) {
                     $report['countDb'] = $report['countDb']+1;
                 } else {

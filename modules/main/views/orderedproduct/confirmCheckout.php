@@ -25,7 +25,7 @@ $this->params['menu'] = 3;
         'filterModel' => $searchModel,
         'columns' => [
             
-            'kpr',
+            'kodpart',
             'imn',
             'otd',
             [

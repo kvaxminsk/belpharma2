@@ -24,7 +24,7 @@ class ActionProductsColumn extends ActionColumn
                 return '<div class="opt-quontity product notordered ' . $model->id . '">
                             <span class="quont-minus btn"></span>
                             <input class="id" type="hidden" value="' . $model->id . '">
-                            <input class="kpr" type="hidden" value="' . $model->kpr . '">
+                            <input class="kodpart" type="hidden" value="' . $model->kodpart . '">
                             <input class="kol" type="text" value="1">
                             <span class="quont-plus btn"></span>
                             <button class="btn btn-primary '. $this->buttonClass . '">Добавить</button>

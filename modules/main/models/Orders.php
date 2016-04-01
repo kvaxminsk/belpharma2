@@ -126,7 +126,7 @@ class Orders extends \yii\db\ActiveRecord
         $contragentCod = User::findOne($this->user_id)->cod;
         //Structure of the dbf-file
         $def = array(
-            array('KPR', 'C', 7, 0),
+            array('kpr', 'C', 7, 0),
             array('IMN', 'C', 120, 0),
             array('OTD', 'N', 2, 0),
             array('KOLZ', 'N', 10, 3),
@@ -196,7 +196,7 @@ class Orders extends \yii\db\ActiveRecord
         $dom->appendChild($root);
         foreach ($orderedProducts as $product) {
             $row = $dom->createElement('ROW');
-            $kpr = $dom->createElement('KPR', $product->kpr);
+            $kpr = $dom->createElement('kpr', $product->kpr);
             $imn = $dom->createElement('IMN', $product->imn);
             $otd = $dom->createElement('OTD', $product->otd);
             $kolz = $dom->createElement('KOLZ', $product->kolz);

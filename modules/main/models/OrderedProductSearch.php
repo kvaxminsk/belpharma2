@@ -19,7 +19,7 @@ class OrderedProductSearch extends OrderedProduct
     {
         return [
             [['id', 'kolz', 'buggod', 'status', 'user_id'], 'integer'],
-            [['kpr', 'imn', 'otd', 'dsv'], 'safe'],
+            [['kodpart', 'imn', 'otd', 'dsv'], 'safe'],
         ];
     }
 
@@ -66,7 +66,7 @@ class OrderedProductSearch extends OrderedProduct
             'user_id' => $this->user_id,
         ]);
 
-        $query->andFilterWhere(['like', 'kpr', $this->kpr])
+        $query->andFilterWhere(['like', 'kodpart', $this->kodpart])
             ->andFilterWhere(['like', 'imn', $this->imn])
             ->andFilterWhere(['like', 'otd', $this->otd])
             ->andFilterWhere(['like', 'dsv', $this->dsv]);
@@ -92,7 +92,7 @@ class OrderedProductSearch extends OrderedProduct
             'kolz' => $this->kolz,
             'buggod' => $this->buggod,
         ]);
-        $query->andFilterWhere(['like', 'kpr', $this->kpr])
+        $query->andFilterWhere(['like', 'kodpart', $this->kodpart])
             ->andFilterWhere(['like', 'imn', $this->imn])
             ->andFilterWhere(['like', 'otd', $this->otd])
             ->andFilterWhere(['like', 'dsv', $this->dsv]);
@@ -117,7 +117,7 @@ class OrderedProductSearch extends OrderedProduct
             'kolz' => $this->kolz,
             'buggod' => $this->buggod,
         ]);
-        $query->andFilterWhere(['like', 'kpr', $this->kpr])
+        $query->andFilterWhere(['like', 'kodpart', $this->kodpart])
             ->andFilterWhere(['like', 'imn', $this->imn])
             ->andFilterWhere(['like', 'otd', $this->otd])
             ->andFilterWhere(['like', 'dsv', $this->dsv]);
@@ -139,7 +139,7 @@ class OrderedProductSearch extends OrderedProduct
             'kolz' => $this->kolz,
             'buggod' => $this->buggod,
         ]);
-        $query->andFilterWhere(['like', 'kpr', $this->kpr])
+        $query->andFilterWhere(['like', 'kodpart', $this->kodpart])
             ->andFilterWhere(['like', 'imn', $this->imn])
             ->andFilterWhere(['like', 'otd', $this->otd])
             ->andFilterWhere(['like', 'dsv', $this->dsv]);

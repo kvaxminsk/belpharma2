@@ -35,9 +35,9 @@ $this->registerJsFile('js/ordered2.js', [
         'filterModel' => $searchModel,
         'columns' => [
             [   
-                'attribute' => 'kpr',
+                'attribute' => 'kodpart',
                 'value' => function($model, $key, $index, $column) {
-                        return Html::a($model->kpr, ['#'], ['class' => 'green-link desc-link']);
+                        return Html::a($model->kodpart, ['#'], ['class' => 'green-link desc-link']);
                 },
                 'format' => 'html',
             ],
@@ -51,7 +51,7 @@ $this->registerJsFile('js/ordered2.js', [
             [
                 'label' => 'Форма выпуска',
                 'value' => function ($model, $key, $index, $column) {
-                    $product = app\modules\main\models\Products::findOne(['kpr' => $model->kpr]);
+                    $product = app\modules\main\models\Products::findOne(['kodpart' => $model->kodpart]);
                     if(isset($product)) {
                         return $product->nshort3;
                     } else {

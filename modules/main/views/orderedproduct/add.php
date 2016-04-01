@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'mnn',
             'tn',
-            'kpr',
+            'kodpart',
             'nshort3',
             'namepr',
             'country',

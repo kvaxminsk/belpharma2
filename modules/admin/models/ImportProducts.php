@@ -197,6 +197,10 @@ class ImportProducts extends \yii\db\ActiveRecord
                     {
                         $product->vidpost = $this->parseRowTag($reader);
                     }
+                    if($reader->nodeType == \XMLReader::ELEMENT && $reader->name == "NDS")
+                    {
+                        $product->nds = $this->parseRowTag($reader);
+                    }
                     if($reader->nodeType == \XMLReader::ELEMENT && $reader->name == "KodPart")
                     {
                         $product->kodpart = $this->parseRowTag($reader);

@@ -40,7 +40,7 @@ AppAsset::register($this);
                     <div id="info">
                         Добрый день, <?= !empty(Yii::$app->user->identity->name) ? Yii::$app->user->identity->name : Yii::$app->user->identity->username ?>!<br/>
                         <?php if (Yii::$app->user->identity->role == 2) { ?>
-                            Ваш заказ на сумму (руб): <span><?= app\modules\main\models\Orders::getPriceOfOrder() ?></span>
+                            Ваш заказ на сумму (руб): <span><?= app\modules\main\models\Orders::getPriceOfOrder() ?> </span>
                         <?php } ?>
                     </div>
                     <div id="out">

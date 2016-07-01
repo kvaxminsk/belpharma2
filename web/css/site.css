@@ -66,11 +66,11 @@ body {
 }
 
 .modal{
-	width: 400px;
-	height: 680px;
+	width: 600px;
+	height: 730px;
 	position: fixed;
 	background-color: #ffffff;
-	top: 50px;
+	top: 30px;
 	left: 44%;
 	font-family: 'Din Regular';
 	padding: 35px 30px;
@@ -91,7 +91,7 @@ body {
 	position: absolute;
 	width: 40px;
 	height: 40px;
-	left: 360px;
+	left: 560px;
     top: 0;
 	background: url(../img/close.png);
 }
@@ -117,7 +117,7 @@ body {
 }
 
 .table-cover{
-	padding: 20px 0;
+	padding: 0px 0;
 	border-top: solid 1px #999999;
 }
 

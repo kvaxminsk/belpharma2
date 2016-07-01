@@ -94,10 +94,9 @@ class OrderedproductController extends Controller
         $event = new OrderEvent();
         $event->orderedProduct = $model;
         $model->on(self::EVENT_ADD_PRODUCT_TO_ORDER, ['app\modules\main\models\Orders', 'createNewOrder']);
-
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
-            $model->kolz = (int)$post['kol'];
+            $model->kolz = substr(str_replace(',','.',$post['kol']),0,5);
             $model->trigger(self::EVENT_ADD_PRODUCT_TO_ORDER, $event);
             if($model->save())
             {
@@ -116,6 +115,7 @@ class OrderedproductController extends Controller
      */
     public function actionAddToProductForOrder($id, $orderId)
     {
+
         $product = Products::findOne(['kodpart' => $id]);
         $model = OrderedProduct::findOne([
             'kodpart' => $id,
@@ -238,6 +238,50 @@ class OrderedproductController extends Controller
                 'order' => $order,
             ]);
         }
+    }
+
+    /**
+     *  Список товаров прикрепленных к заказу на печать.
+     * @return mixed
+     */
+    public function actionPrint($id=null)
+    {
+        $this->layout = '@app/views/layouts/print';
+        if ($id) {
+            $totalPrice = OrdersQuery::totalPriceThis($id);
+            $order = Orders::findOne($id);
+            $searchModel = new OrderedProductSearch();
+            $dataProvider = $searchModel->searchAttachToTheOrder($id, Yii::$app->request->queryParams);
+            $validOrder = true;
+        }
+        else {
+            $totalPrice = OrdersQuery::totalPrice();
+            $totalPriceWithoutNds = OrdersQuery::totalPrice();
+            $order = Orders::findOne(Yii::$app->session->get('idOrder'));
+            $searchModel = new OrderedProductSearch();
+            $dataProvider = $searchModel->searchAttachToOrder(Yii::$app->request->queryParams);
+            $validOrder = true;
+            $orderedProducts = $dataProvider->models;
+            foreach($orderedProducts as $orderdedProduct) {
+                if(!$orderdedProduct->isProduct) {
+                    $validOrder = false;
+                }
+            }
+            if($dataProvider->count < $dataProvider->totalCount) {
+                $validOrder = false;
+            };
+        }
+
+
+
+        return $this->render('print', [
+            'dataProvider' => $dataProvider,
+            'totalPrice' => $totalPrice,
+            'totalPriceWithoutNds' => $totalPriceWithoutNds,
+            'order' => $order,
+            'validOrder' => $validOrder,
+        ]);
+
     }
     
     public function actionRemove($id)

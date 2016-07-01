@@ -53,31 +53,36 @@
             </tr>
             <tr>
                 <td>10</td>
-                <td class="black">Цена оптовая:</td>
-                <td id="p11"></td>
+                <td class="black">НДС:</td>
+                <td id="p19"></td>
             </tr>
             <tr>
                 <td>11</td>
+                <td class="black">Цена оптовая без НДС:</td>
+                <td id="p11"></td>
+            </tr>
+            <tr>
+                <td>12</td>
                 <td class="black">Количество на складе:</td>
                 <td id="p13"></td>
             </tr>
             <tr>
-                <td>12</td>
+                <td>13</td>
                 <td class="black">Вид товара:</td>
                 <td id="p15"></td>
             </tr>
             <tr>
-                <td>13</td>
+                <td>14</td>
                 <td class="black">Признак обязательного наличия в аптеке:</td>
                 <td id="p16"></td>
             </tr>
             <tr>
-                <td>14</td>
+                <td>15</td>
                 <td class="black">Количество в заводской упаковке:</td>
                 <td id="p17"></td>
             </tr>
             <tr>
-                <td>15</td>
+                <td>16</td>
                 <td class="black">Вид поступления:</td>
                 <td id="p18"></td>
             </tr>

@@ -18,7 +18,8 @@ class OrderedProductSearch extends OrderedProduct
     public function rules()
     {
         return [
-            [['id', 'kolz', 'buggod', 'status', 'user_id'], 'integer'],
+            [['id', 'buggod', 'status', 'user_id'], 'integer'],
+            [['kolz'], 'string'],
             [['kodpart', 'imn', 'otd', 'dsv'], 'safe'],
         ];
     }
@@ -46,7 +47,7 @@ class OrderedProductSearch extends OrderedProduct
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 100,
+                'pageSize' => 200,
             ]
         ]);
 
@@ -79,8 +80,10 @@ class OrderedProductSearch extends OrderedProduct
         $query = OrderedProduct::find()->whereOrderId();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => ['defaultOrder' => ['imn' => SORT_ASC]],
             'pagination' => [
-                'pageSize' => 100,
+                'pageSize' => 200,
+
             ]
         ]);
         $this->load($params);
@@ -104,8 +107,9 @@ class OrderedProductSearch extends OrderedProduct
         $query = OrderedProduct::find()->where(['order_id' => $id]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => ['defaultOrder' => ['imn' => SORT_ASC]],
             'pagination' => [
-                'pageSize' => 100,
+                'pageSize' => 200,
             ],
         ]);
         $this->load($params);

@@ -13,7 +13,7 @@ use app\modules\main\models\Products;
 
  * @property string $imn
  * @property string $otd
- * @property integer $kolz
+ * @property string $kolz
  * @property string $dsv
  * @property integer $buggod
  * @property integer $status
@@ -48,7 +48,8 @@ class OrderedProduct extends \yii\db\ActiveRecord
     {
         return [
             //[['kpr', 'imn', 'otd', 'kolz', 'dsv', 'buggod', 'status'], 'required'],
-            [['kolz', 'buggod', 'status', 'user_id', 'order_id', 'otd'], 'integer'],
+            [['buggod', 'status', 'user_id', 'order_id', 'otd'], 'integer'],
+            [['kolz'],'string', 'max' => 5],
             [['kpr'], 'string', 'max' => 7],
             [['kodpart'], 'string', 'max' => 7],
             [['imn', 'dsv'], 'string', 'max' => 255],
@@ -89,13 +90,13 @@ class OrderedProduct extends \yii\db\ActiveRecord
     {
         $price = Products::findOne(['kodpart' => $this->kodpart, 'otd' => $this->otd, 'namepr' => $this->dsv]);
         if(isset($price)) {
-            return $price->cenopt;
+            return $price->cenopt+$price->nds*$price->cenopt/100;
         } else {
             return null;
         }
         
     }
-    
+
     /**
      * Получить суммарную оптовую цену по заказанному товару
      * @return integer цена в рублях

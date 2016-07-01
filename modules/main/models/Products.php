@@ -78,7 +78,8 @@ class Products extends \yii\db\ActiveRecord
             'tender' => 'Признак централизованного тендера',
             'spar' => 'Серия партии',
             'goden_do' => 'Срок годности',
-            'cenopt' => 'Цена оптовая',
+            'nds' => 'НДС',
+            'cenopt' => 'Цена оптовая без НДС',
             'cenrozn' => 'Цена розничная',
             'kol' => 'Количество на складе',
             'tendergod' => 'Год централизованного тендера',
@@ -87,6 +88,7 @@ class Products extends \yii\db\ActiveRecord
             'kolotgr' => 'Количество в заводской упаковке',
             'vidpost' => 'Вид поступления',
             'kodpart' => '',
+
         ];
     }
 

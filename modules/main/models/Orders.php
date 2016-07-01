@@ -270,4 +270,9 @@ class Orders extends \yii\db\ActiveRecord
         $priceOfOrder = self::find()->totalPriceForOrder(Yii::$app->session->get('idOrder'));
         return number_format($priceOfOrder, 0, ',', ' ');
     }
+    public static function getPriceOfOrderNumber()
+    {
+        $priceOfOrder = self::find()->totalPriceForOrder(Yii::$app->session->get('idOrder'));
+        return $priceOfOrder;
+    }
 }

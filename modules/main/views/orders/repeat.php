@@ -28,7 +28,7 @@ $this->params['menu'] = 4;
     <h1><?= Html::encode($this->title) ?></h1>
     
     <p>
-        Ваш заказ на сумму: <b><?= number_format($totalPrice, 0, ',', ' ') ?> руб.</b><br>
+        Ваш заказ на сумму: <b><?= number_format($totalPrice, 0, ',', ' ') ?> руб.</b> / <?= number_format($totalPrice/10000, 2, ' руб.', '') . ' коп.'?><br>
         Тип договора: <b><?= $order->buggodName ?></b>
     </p>
     <?= GridView::widget([
@@ -52,9 +52,23 @@ $this->params['menu'] = 4;
             ],
             'otd',
             [
-                'label' => 'Сумма (руб.)',
+                'label' => 'Ставка НДС',
                 'value' => function ($model, $key, $index, $column) {
-                    return number_format($model->wholesaleTotalPrice, 0, ',', ' ');
+                    $product = app\modules\main\models\Products::findOne(['kodpart' => $model->kodpart]);
+                    if(isset($product)) {
+                        return $product->nds;
+                    } else {
+                        return 0;
+                    }
+                },
+                'format' => 'text'
+            ],
+            [
+                'label' => 'Сумма с НДС',
+                'value' => function ($model, $key, $index, $column) {
+                    $byn = '/ ' .number_format(($model->wholesaleTotalPrice)/10000, 2, ' руб.', '');;
+                    return number_format($model->wholesaleTotalPrice, 0, ',', ' '). " руб. " .
+                    $byn . ' коп.' ;
                 },
                 'format' => 'text'
             ],
@@ -85,7 +99,7 @@ $this->params['menu'] = 4;
         ]) ?>
         <?php } else { ?>
     <div class="alert alert-danger">В заявке присутствуют товары отсутствующие на складе. Для совершения повторной отправки этой заявки необходимо удалить из нее все товары отсутсвующие на складе. Для этого нажмите кнопку "Изменить", а далее удалите товары отсутсвующие на складе нажав пиктограмму "Корзина". <br><br>Или не изменяйте эту заявку, а оформите новую. Возможно, что товары отсутсвующие сейчас на складе, появятся в будущем, тогда этот шаблон заявки сохранится в неизменном виде.</div>
-    <div class="alert alert-warning">Ограничение: одна заявка не может содержать более 100 товаров</div>
+    <div class="alert alert-warning">Ограничение: одна заявка не может содержать более 200 товаров</div>
         <?php } ?>
         
         <?= Html::a('Изменить', ['/main/orderedproduct/change', 'id' => $order->id], [

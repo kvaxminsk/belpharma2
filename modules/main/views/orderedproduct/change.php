@@ -27,7 +27,8 @@ $this->registerJsFile('js/ordered2.js', [
     <h1><?= Html::encode($this->title) ?> </h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
     <p>
-        Заказ на сумму: <b><?= number_format($totalPrice, 0, ',', ' ') ?> руб.</b>
+        Заказ на сумму: <b><?= number_format($totalPrice, 0, ',', ' ') ?> руб.</b> / <?= number_format($totalPrice/10000, 2, ' руб.', '') . ' коп.'?>
+        <a style="float: right;margin-right: -190px;" href="/main/orderedproduct/print/<?=$order->id;?>"><img src="/img/print-icon.png"/></a>
     </p>
     
     <?= GridView::widget([
@@ -68,9 +69,23 @@ $this->registerJsFile('js/ordered2.js', [
                 'format' => 'html',
             ],
             [
-                'label' => 'Сумма (руб.)',
+                'label' => 'Ставка НДС',
                 'value' => function ($model, $key, $index, $column) {
-                    return number_format($model->wholesaleTotalPrice, 0, ',', ' ');
+                    $product = app\modules\main\models\Products::findOne(['kodpart' => $model->kodpart]);
+                    if(isset($product)) {
+                        return $product->nds;
+                    } else {
+                        return 0;
+                    }
+                },
+                'format' => 'text'
+            ],
+            [
+                'label' => 'Сумма с НДС',
+                'value' => function ($model, $key, $index, $column) {
+                    $byn = '/ ' .number_format(($model->wholesaleTotalPrice)/10000, 2, ' руб.', '');;
+                    return number_format($model->wholesaleTotalPrice, 0, ',', ' '). " руб. " .
+                    $byn . ' коп.' ;
                 },
                 'format' => 'text'
             ],

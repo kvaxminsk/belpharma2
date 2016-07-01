@@ -11,7 +11,7 @@ updateCounters = function () {
 };
 $('.quont-minus').click(function () {
     var $input = $(this).parent().find('input.kol');
-    var count = parseInt($input.val()) - 1;
+    var count = parseFloat($input.val()) - 1;
     count = count < 1 ? 1 : count;
     $input.val(count);
     $input.change();
@@ -19,14 +19,14 @@ $('.quont-minus').click(function () {
 });
 $('.quont-plus').click(function () {
     var $input = $(this).parent().find('input.kol');
-    $input.val(parseInt($input.val()) + 1);
+    $input.val(parseFloat($input.val()) + 1);
     $input.change();
     return false;
 });
 $('.add-product').click(function () {
     var id = $(this).parent().find('input.id').val();
     var kodpart = $(this).parent().find('input.kodpart').val();
-    var kol = $(this).parent().find('input.kol').val();
+    var kol = $(this).parent().find('input.kol').val().slice(0,5).replace(',','.');
     $.ajax({
         url: '/main/orderedproduct/add-to-product?id=' + kodpart,
         type: 'POST',
@@ -55,7 +55,7 @@ $('.add-the-product').click(function () {
     var orderId = pathname.split('/').pop();
     var id = $(this).parent().find('input.id').val();
     var kodpart = $(this).parent().find('input.kodpart').val();
-    var kol = $(this).parent().find('input.kol').val();
+    var kol = $(this).parent().find('input.kol').val().slice(0,5).replace(',','.');
     $.ajax({
         url: '/main/orderedproduct/add-to-product-for-order?id=' + kodpart + '&orderId=' + orderId,
         type: 'POST',
@@ -105,6 +105,7 @@ var descHandler = function (data, statusText, jqXHR) {
     }
     table.find('tr td#p9').text(data.spar);
     table.find('tr td#p10').text(data.goden_do);
+    table.find('tr td#p19').text(data.nds*data.cenopt/100 + rub);
     table.find('tr td#p11').text(data.cenopt + rub);
     table.find('tr td#p12').text(data.cenrozn + rub);
     table.find('tr td#p13').text(data.kol + pieces);

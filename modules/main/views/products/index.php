@@ -134,9 +134,19 @@ $columns = [
         'attribute' => 'cenopt',
         //'filter' => InputWithClose::widget(['model' => $searchModel, 'attribute' => 'cenopt']),
         'value' => function($model, $key, $index, $column) {
-            return Html::a(number_format($model->cenopt, 0, ',', ' ') . ' руб.', ['#'], ['class' => 'desc-link']);
+            return Html::a(number_format($model->nds, 0, ',', ' ') . ' руб.', ['#'], ['class' => 'desc-link']);
         },
-        'label' => 'Цена<br>оптовая',
+        'label' => 'НДС<br>',
+        'encodeLabel' => false,
+        'format' => 'html',
+    ],
+    [
+        'attribute' => 'cenopt',
+        //'filter' => InputWithClose::widget(['model' => $searchModel, 'attribute' => 'cenopt']),
+        'value' => function($model, $key, $index, $column) {
+            return Html::a(number_format($model->cenopt, 0, ',', ' ') . ' руб. ', ['#'], ['class' => 'desc-link'] ) . '<br>' . Html::a( number_format($model->cenopt/10000, 2, ' руб.', '') . ' коп.', ['#'], ['class' => 'desc-link']);
+        },
+        'label' => 'Цена оптовая<br>без НДС',
         'encodeLabel' => false,
         'format' => 'html',
     ],

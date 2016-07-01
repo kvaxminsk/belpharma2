@@ -31,10 +31,13 @@ $this->params['menu'] = 3;
     </p>
     <?php } else { ?>
     <p>
-        Ваш заказ на сумму: <b><?= number_format($totalPrice, 0, ',', ' ') ?> руб.</b>
+        Ваш заказ на сумму: <b><?= number_format($totalPrice, 0, ',', ' ') ?> руб. </b> / <?= number_format($totalPrice/10000, 2, ' руб.', '') . ' коп.'?>
+
+        <a style="float: right;margin-right: -190px;" href="/main/orderedproduct/print"><img src="/img/print-icon.png"/></a>
     </p>
+
     <?php } ?>
-    
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -73,9 +76,23 @@ $this->params['menu'] = 3;
                 'format' => 'html',
             ],
             [
-                'label' => 'Сумма (руб.)',
+                'label' => 'Ставка НДС',
                 'value' => function ($model, $key, $index, $column) {
-                    return number_format($model->wholesaleTotalPrice, 0, ',', ' ');
+                    $product = app\modules\main\models\Products::findOne(['kodpart' => $model->kodpart]);
+                    if(isset($product)) {
+                        return $product->nds;
+                    } else {
+                        return 0;
+                    }
+                },
+                'format' => 'text'
+            ],
+            [
+                'label' => 'Сумма с НДС',
+                'value' => function ($model, $key, $index, $column) {
+                    $byn = '/ ' .number_format(($model->wholesaleTotalPrice)/10000, 2, ' руб.', '');;
+                    return number_format($model->wholesaleTotalPrice, 0, ',', ' '). " руб. " .
+                    $byn . ' коп.' ;
                 },
                 'format' => 'text'
             ],
@@ -116,7 +133,7 @@ $this->params['menu'] = 3;
     </p>
     <?php } else { ?>
     <div class="alert alert-danger">В заявке присутствуют товары отсутствующие на складе. Для совершения отправки этой заявки необходимо удалить из нее все товары отсутсвующие на складе. Для этого нажмите пиктограмму "Корзина" на тех товарах, которых нет в наличии. </div>
-    <div class="alert alert-warning">Ограничение: одна заявка не может содержать более 100 товаров</div>
+    <div class="alert alert-warning">Ограничение: одна заявка не может содержать более 200 товаров</div>
     <?php } ?>
 </div>
 <?= $this->render('@app/views/modals/descriptionProduct') ?>

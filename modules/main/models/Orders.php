@@ -91,7 +91,7 @@ class Orders extends \yii\db\ActiveRecord
     
     public function getTotalPriceForOrder()
     {
-        return number_format(self::find()->totalPriceForOrder($this->id), 0, ',', ' ');
+        return number_format(self::find()->totalPriceForOrder($this->id),  2, ' руб ', ' ') . 'коп';
     }
     
     public function getCountProducts()
@@ -268,7 +268,7 @@ class Orders extends \yii\db\ActiveRecord
     public static function getPriceOfOrder()
     {
         $priceOfOrder = self::find()->totalPriceForOrder(Yii::$app->session->get('idOrder'));
-        return number_format($priceOfOrder, 0, ',', ' ');
+        return number_format($priceOfOrder,  2, ' руб ', ' ') . 'коп';
     }
     public static function getPriceOfOrderNumber()
     {

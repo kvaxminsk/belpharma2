@@ -28,7 +28,7 @@ $this->params['menu'] = 4;
     <h1><?= Html::encode($this->title) ?></h1>
     
     <p>
-        Ваш заказ на сумму: <b><?= number_format($totalPrice, 0, ',', ' ') ?> руб.</b> / <?= number_format($totalPrice/10000, 2, ' руб.', '') . ' коп.'?><br>
+        Ваш заказ на сумму: <b><?= number_format($totalPrice,  2, ' руб ', ' ') . 'коп' ?></b><br>
         Тип договора: <b><?= $order->buggodName ?></b>
     </p>
     <?= GridView::widget([
@@ -66,9 +66,7 @@ $this->params['menu'] = 4;
             [
                 'label' => 'Сумма с НДС',
                 'value' => function ($model, $key, $index, $column) {
-                    $byn = '/ ' .number_format(($model->wholesaleTotalPrice)/10000, 2, ' руб.', '');;
-                    return number_format($model->wholesaleTotalPrice, 0, ',', ' '). " руб. " .
-                    $byn . ' коп.' ;
+                    return number_format($model->wholesaleTotalPrice, 0, ',', ' ');
                 },
                 'format' => 'text'
             ],

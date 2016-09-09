@@ -13,7 +13,7 @@ use app\modules\main\models\Products;
 
  * @property string $imn
  * @property string $otd
- * @property string $kolz
+ * @property float $kolz
  * @property string $dsv
  * @property integer $buggod
  * @property integer $status
@@ -95,6 +95,24 @@ class OrderedProduct extends \yii\db\ActiveRecord
             return null;
         }
         
+    }
+    public function getWholesalePriceWithoutNds()
+    {
+        $price = Products::findOne(['kodpart' => $this->kodpart, 'otd' => $this->otd, 'namepr' => $this->dsv]);
+        if(isset($price)) {
+            return $price->cenopt;
+        } else {
+            return null;
+        }
+
+    }
+    public function getWholesaleTotalPriceWithoutNds()
+    {
+        $price = $this->getWholesalePriceWithoutNds();
+        $totalPrice = $price * $this->kolz;
+        return $totalPrice;
+
+
     }
 
     /**

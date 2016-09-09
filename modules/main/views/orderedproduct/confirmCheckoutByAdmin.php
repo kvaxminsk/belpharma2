@@ -17,7 +17,7 @@ $this->params['menu'] = 3;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
     <p>
-        Общая сумма заказа: <b><?= $totalPrice ?></b> / <?= number_format($totalPrice/10000, 2, ' руб.', '') . ' коп.'?><br>
+        Общая сумма заказа: <b><?= $totalPrice ?></b><br>
         Тип договора: <b><?= $order->buggod ?></b>
     </p>
     <?= GridView::widget([
@@ -43,9 +43,7 @@ $this->params['menu'] = 3;
             [
                 'label' => 'Сумма с НДС',
                 'value' => function ($model, $key, $index, $column) {
-                    $byn = '/ ' .number_format(($model->wholesaleTotalPrice)/10000, 2, ' руб.', '');;
-                    return number_format($model->wholesaleTotalPrice, 0, ',', ' '). " руб. " .
-                    $byn . ' коп.' ;
+                    return number_format($model->wholesaleTotalPrice,  2, ' руб ', ' ') . 'коп';
                 },
                 'format' => 'text'
             ],

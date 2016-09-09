@@ -42,6 +42,11 @@ class OrdersQuery extends \yii\db\ActiveQuery
         $orderedProducts = OrderedProduct::find()->allProducts();
         return self::calcTotalPrice($orderedProducts);
     }
+    public static function totalPriceWithoutNds()
+    {
+        $orderedProducts = OrderedProduct::find()->allProducts();
+        return self::calcTotalPriceWithoutNds($orderedProducts);
+    }
     
     /**
      * Получает общую сумму заказа по его id
@@ -53,7 +58,11 @@ class OrdersQuery extends \yii\db\ActiveQuery
         $orderedProducts = OrderedProduct::find()->allProductsForOrder($id);
         return self::calcTotalPrice($orderedProducts);
     }
-    
+    public static function totalPriceWithoutNdsThis($id)
+    {
+        $orderedProducts = OrderedProduct::find()->allProductsForOrder($id);
+        return self::calcTotalPriceWithoutNds($orderedProducts);
+    }
     /**
      * Получает общую сумму заказа по его ID
      * @param integer ID заказа
@@ -77,6 +86,16 @@ class OrdersQuery extends \yii\db\ActiveQuery
         foreach ($orderedProducts as $product) 
         {
             $totalPrice += $product->wholesaleTotalPrice;
+        }
+        return $totalPrice;
+    }
+
+    protected static function calcTotalPriceWithoutNds($orderedProducts)
+    {
+        $totalPrice = 0;
+        foreach ($orderedProducts as $product)
+        {
+            $totalPrice += $product->wholesaleTotalPriceWithoutNds;
         }
         return $totalPrice;
     }

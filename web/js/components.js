@@ -1,3 +1,17 @@
+var orderedProducts =null;
+$( document ).ready(function() {
+    $.ajax({
+        url: '/main/orders/get-counters',
+        dataType: 'json',
+        success: function (data, textStatus, jqXHR) {
+            var counters = data;
+            $('a.ordered-products').text('Оформить заказ (' + counters.orderedProducts + ')');
+            $('#info span').text(counters.totalPrice);
+            orderedProducts = counters.orderedProducts;
+        }
+    });
+});
+
 updateCounters = function () {
     $.ajax({
         url: '/main/orders/get-counters',
@@ -6,12 +20,13 @@ updateCounters = function () {
             var counters = data;
             $('a.ordered-products').text('Оформить заказ (' + counters.orderedProducts + ')');
             $('#info span').text(counters.totalPrice);
+            orderedProducts = counters.orderedProducts;
         }
     });
 };
 $('.quont-minus').click(function () {
     var $input = $(this).parent().find('input.kol');
-    var count = parseFloat($input.val()) - 1;
+    var count = parseInt($input.val()) - 1;
     count = count < 1 ? 1 : count;
     $input.val(count);
     $input.change();
@@ -19,35 +34,41 @@ $('.quont-minus').click(function () {
 });
 $('.quont-plus').click(function () {
     var $input = $(this).parent().find('input.kol');
-    $input.val(parseFloat($input.val()) + 1);
+    $input.val(parseInt($input.val()) + 1);
     $input.change();
     return false;
 });
 $('.add-product').click(function () {
     var id = $(this).parent().find('input.id').val();
     var kodpart = $(this).parent().find('input.kodpart').val();
-    var kol = $(this).parent().find('input.kol').val().slice(0,5).replace(',','.');
-    $.ajax({
-        url: '/main/orderedproduct/add-to-product?id=' + kodpart,
-        type: 'POST',
-        data: {
-            'id': id,
-            'kol': kol
-        },
-        success: function (result) {
-            var notordered = $('.product.notordered.' + id);
-            notordered.css('display', 'none');
-            var ordered = $('.product.ordered.' + id);
-            ordered.css('display', 'block');
-            ordered.find('a').css('display', 'block');
-            var span = ordered.find('a span');
-            span.text('(' + kol + ')');
-            updateCounters();
-        },
-        error: function () {
-            console.log('err');
-        }
-    });
+    var kol = $(this).parent().find('input.kol').val();
+    if(orderedProducts < 200) {
+        $.ajax({
+            url: '/main/orderedproduct/add-to-product?id=' + kodpart,
+            type: 'POST',
+            data: {
+                'id': id,
+                'kol': kol
+            },
+            success: function (result) {
+                var notordered = $('.product.notordered.' + id);
+                notordered.css('display', 'none');
+                var ordered = $('.product.ordered.' + id);
+                ordered.css('display', 'block');
+                ordered.find('a').css('display', 'block');
+                var span = ordered.find('a span');
+                span.text('(' + kol + ')');
+                updateCounters();
+            },
+            error: function () {
+                console.log('err');
+            }
+        });
+    }
+    else {
+        alert('Ограничение: одна заявка не может содержать более 200 товаров');
+    }
+
     return false;
 });
 $('.add-the-product').click(function () {
@@ -55,7 +76,7 @@ $('.add-the-product').click(function () {
     var orderId = pathname.split('/').pop();
     var id = $(this).parent().find('input.id').val();
     var kodpart = $(this).parent().find('input.kodpart').val();
-    var kol = $(this).parent().find('input.kol').val().slice(0,5).replace(',','.');
+    var kol = $(this).parent().find('input.kol').val();
     $.ajax({
         url: '/main/orderedproduct/add-to-product-for-order?id=' + kodpart + '&orderId=' + orderId,
         type: 'POST',
@@ -105,7 +126,7 @@ var descHandler = function (data, statusText, jqXHR) {
     }
     table.find('tr td#p9').text(data.spar);
     table.find('tr td#p10').text(data.goden_do);
-    table.find('tr td#p19').text(data.nds*data.cenopt/100 + rub);
+    table.find('tr td#p19').text(data.nds);
     table.find('tr td#p11').text(data.cenopt + rub);
     table.find('tr td#p12').text(data.cenrozn + rub);
     table.find('tr td#p13').text(data.kol + pieces);

@@ -249,6 +249,7 @@ class OrderedproductController extends Controller
         $this->layout = '@app/views/layouts/print';
         if ($id) {
             $totalPrice = OrdersQuery::totalPriceThis($id);
+            $totalPriceWithoutNds = OrdersQuery::totalPriceWithoutNdsThis($id);
             $order = Orders::findOne($id);
             $searchModel = new OrderedProductSearch();
             $dataProvider = $searchModel->searchAttachToTheOrder($id, Yii::$app->request->queryParams);
@@ -256,7 +257,7 @@ class OrderedproductController extends Controller
         }
         else {
             $totalPrice = OrdersQuery::totalPrice();
-            $totalPriceWithoutNds = OrdersQuery::totalPrice();
+            $totalPriceWithoutNds = OrdersQuery::totalPriceWithoutNds();
             $order = Orders::findOne(Yii::$app->session->get('idOrder'));
             $searchModel = new OrderedProductSearch();
             $dataProvider = $searchModel->searchAttachToOrder(Yii::$app->request->queryParams);
@@ -269,7 +270,7 @@ class OrderedproductController extends Controller
             }
             if($dataProvider->count < $dataProvider->totalCount) {
                 $validOrder = false;
-            };
+            }
         }
 
 

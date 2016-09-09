@@ -27,7 +27,7 @@ $this->registerJsFile('js/ordered2.js', [
     <h1><?= Html::encode($this->title) ?> </h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
     <p>
-        Заказ на сумму: <b><?= number_format($totalPrice, 0, ',', ' ') ?> руб.</b> / <?= number_format($totalPrice/10000, 2, ' руб.', '') . ' коп.'?>
+        Заказ на сумму: <b><?= number_format($totalPrice,  2, ' руб ', ' ') . 'коп' ?></b>
         <a style="float: right;margin-right: -190px;" href="/main/orderedproduct/print/<?=$order->id;?>"><img src="/img/print-icon.png"/></a>
     </p>
     
@@ -83,9 +83,7 @@ $this->registerJsFile('js/ordered2.js', [
             [
                 'label' => 'Сумма с НДС',
                 'value' => function ($model, $key, $index, $column) {
-                    $byn = '/ ' .number_format(($model->wholesaleTotalPrice)/10000, 2, ' руб.', '');;
-                    return number_format($model->wholesaleTotalPrice, 0, ',', ' '). " руб. " .
-                    $byn . ' коп.' ;
+                    return number_format($model->wholesaleTotalPrice,  2, ' руб ', ' ') . 'коп';
                 },
                 'format' => 'text'
             ],

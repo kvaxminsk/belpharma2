@@ -7,6 +7,7 @@ use yii\widgets\ActiveForm;
 use yii\web\View;
 use app\assets\AppAsset;
 use app\components\grid\ActionProductsColumn;
+use app\modules\user\models\User;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\main\models\OrderedProductSearch */
@@ -95,8 +96,19 @@ $this->title = 'Прикрепленные к заказу товары';
                 'label' => 'Стоимость, руб',
                 'value' => function($model, $key, $index, $column) {
                     $product = app\modules\main\models\Products::findOne(['kodpart' => $model->kodpart]);
+
                     if(isset($product)) {
-                        return number_format($product->cenopt*$model->kolz,  2, ' руб ', ' ') . 'коп';
+                        $userId = Yii::$app->user->getId();
+                        $userModel = User::getById($userId);
+                        if ($userModel->isCenDogovor())
+                        {
+                            $cena =  $product->cendogovor;
+                        }
+                        else
+                        {
+                            $cena = $product->cenopt;
+                        }
+                        return number_format($cena*$model->kolz,  2, ' руб ', ' ') . 'коп';
                     } else {
                         return '<span class="label label-danger">-</span>';
                     }

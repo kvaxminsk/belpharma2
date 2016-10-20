@@ -168,6 +168,11 @@ class ImportProducts extends \yii\db\ActiveRecord
                         $product->cenrozn = $this->parseRowTag($reader);
 
                     }
+                    if($reader->nodeType == \XMLReader::ELEMENT && $reader->name == "CenDogovor")
+                    {
+                        $product->cendogovor = $this->parseRowTag($reader);
+
+                    }
                     if($reader->nodeType == \XMLReader::ELEMENT && $reader->name == "Kol")
                     {
                         $product->kol = $this->parseRowTag($reader);

@@ -26,9 +26,9 @@ class User extends \app\modules\user\models\User
     {
         return ArrayHelper::merge(parent::scenarios(), [
             self::SCENARIO_CREATE_USER => ['username', 'email', 'status', 'newPassword', 'newPasswordRepeat', 
-                'name', 'cod', 'phone', 'address', 'responsible_person'],
+                'name', 'cod', 'phone', 'address','group', 'responsible_person'],
             self::SCENARIO_UPDATE_USER => ['username', 'email', 'status', 'newPassword', 'newPasswordRepeat', 
-                'name', 'cod', 'phone', 'address', 'responsible_person'],
+                'name', 'cod', 'phone', 'address', 'group','responsible_person'],
             self::SCENARIO_CREATE_ADMIN => ['username', 'email', 'status', 'newPassword', 'newPasswordRepeat'],
             self::SCENARIO_UPDATE_ADMIN => ['username', 'email', 'status', 'newPassword', 'newPasswordRepeat'],
         ]);

@@ -16,6 +16,7 @@ class UserSearch extends Model
     public $email;
     public $cod;
     public $address;
+    public $group;
     public $name;
     public $phone;
     public $status;
@@ -27,7 +28,7 @@ class UserSearch extends Model
     {
         return [
             [['id', 'status'], 'integer'],
-            [['username', 'email', 'cod', 'name', 'phone', 'address'], 'safe'],
+            [['username', 'email', 'cod', 'name', 'phone', 'address','group'], 'safe'],
         ];
     }
 
@@ -77,7 +78,7 @@ class UserSearch extends Model
             ->andFilterWhere(['like', 'cod', $this->cod])
             ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'address', $this->address]);
-        
+
         return $dataProvider;
     }
     

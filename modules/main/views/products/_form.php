@@ -35,6 +35,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'goden_do')->textInput() ?>
 
     <?= $form->field($model, 'cenopt')->textInput() ?>
+    <?= $form->field($model, 'cendogovor')->textInput() ?>
 
     <?= $form->field($model, 'cenrozn')->textInput() ?>
 

@@ -33,6 +33,7 @@ $this->params['menu'] = 6;
             'username',
             'name',
             'address',
+            'group',
             'phone',
             'email:email',
             'responsible_person',

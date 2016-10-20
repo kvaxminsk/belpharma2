@@ -5,6 +5,7 @@ namespace app\modules\main\models;
 use Yii;
 use yii\helpers\ArrayHelper;
 use app\modules\main\models\Products;
+use app\modules\user\models\User;
 
 /**
  * This is the model class for table "ordered_product".
@@ -88,8 +89,18 @@ class OrderedProduct extends \yii\db\ActiveRecord
      */
     public function getWholesalePrice()
     {
+        $userId = Yii::$app->user->getId();
+        $userModel = User::getById($userId);
+
         $price = Products::findOne(['kodpart' => $this->kodpart, 'otd' => $this->otd, 'namepr' => $this->dsv]);
+
+
+
         if(isset($price)) {
+            if ($userModel->isCenDogovor())
+            {
+                $price->cenopt =  $price->cendogovor;
+            }
             return $price->cenopt+$price->nds*$price->cenopt/100;
         } else {
             return null;
@@ -98,8 +109,18 @@ class OrderedProduct extends \yii\db\ActiveRecord
     }
     public function getWholesalePriceWithoutNds()
     {
+
+        $userId = Yii::$app->user->getId();
+        $userModel = User::getById($userId);
+
         $price = Products::findOne(['kodpart' => $this->kodpart, 'otd' => $this->otd, 'namepr' => $this->dsv]);
+
+
         if(isset($price)) {
+            if ($userModel->isCenDogovor())
+            {
+                $price->cenopt =  $price->cendogovor;
+            }
             return $price->cenopt;
         } else {
             return null;

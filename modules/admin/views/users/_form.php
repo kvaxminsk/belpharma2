@@ -23,7 +23,9 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'name')->textInput() ?>
     
     <?= $form->field($model, 'address')->textInput() ?>
-    
+
+    <?= $form->field($model, 'group')->dropDownList(['0'=>'Для ЛПУ','1' => 'Договорная']) ?>
+
     <?= $form->field($model, 'phone')->textInput() ?>
     
     <?= $form->field($model, 'cod')->textInput() ?>

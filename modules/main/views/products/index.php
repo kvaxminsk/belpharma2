@@ -140,7 +140,11 @@ $columns = [
         'encodeLabel' => false,
         'format' => 'html',
     ],
-    [
+
+
+];
+if(!$userModel->isCenDogovor()) {
+    $columns[] = [
         'attribute' => 'cenopt',
         //'filter' => InputWithClose::widget(['model' => $searchModel, 'attribute' => 'cenopt']),
         'value' => function($model, $key, $index, $column) {
@@ -149,8 +153,22 @@ $columns = [
         'label' => 'Цена оптовая<br>без НДС',
         'encodeLabel' => false,
         'format' => 'html',
-    ],
-];
+    ];
+}
+else {
+    $columns[] =  [
+        'attribute' => 'cendogovor',
+        //'filter' => InputWithClose::widget(['model' => $searchModel, 'attribute' => 'cenopt']),
+        'value' => function($model, $key, $index, $column) {
+
+            return Html::a(number_format($model->cendogovor, 2, ' руб ', ' ') . ' коп. ' , ['#'], ['class' => 'desc-link']);
+        },
+        'label' => 'Цена по договору<br>без НДС',
+        'encodeLabel' => false,
+        'format' => 'html',
+    ];
+}
+
 $actionColumn = [
     [
         'class' => ActionProductsColumn::className(),
@@ -167,6 +185,7 @@ $actionColumn = [
     <?= $this->render('_search', [
         'model' => $searchModel,
         'countries' => $countries,
+
     ]) ?>
     <?php if (Yii::$app->user->identity->role == 2) { ?>
 

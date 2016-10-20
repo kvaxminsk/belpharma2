@@ -12,6 +12,7 @@ use yii\web\Response;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use app\modules\user\models\User;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
@@ -52,11 +53,14 @@ class ProductsController extends Controller
         $searchModel = new ProductsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $countries = Countries::find()->all();
-        
+        $userId = Yii::$app->user->getId();
+        $userModel = User::getById($userId);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'countries' => $countries,
+            'userModel' => $userModel,
         ]);
     }
 

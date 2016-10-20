@@ -47,6 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'spar',
             'goden_do',
             'cenopt',
+            'cendogovor',
             'cenrozn',
             'kol',
             'tendergod',

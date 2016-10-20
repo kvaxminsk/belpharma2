@@ -68,6 +68,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             
             ['phone', 'required'],
             ['phone', 'string'],
+
+            ['group', 'required'],
+            ['group', 'integer'],
             
             ['responsible_person', 'string', 'max' => 255],
             
@@ -92,6 +95,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'cod' => 'Код',
             'name' => 'Наименование',
             'address' => 'Адрес',
+            'group' => 'Группа(тип цены)',
             'phone' => 'Телефон',
             'role' => 'Роль пользователя',
             'responsible_person' => 'Ответственное лицо по созданию заявок',
@@ -139,7 +143,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->getPrimaryKey();
     }
- 
+
     /**
      * @inheritdoc
      */
@@ -169,7 +173,36 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             self::STATUS_WAIT => "Ожидает подтверждения",                
         ];
     }
-    
+
+    /**
+     * @param $userId
+     * @return null|static
+     */
+    public static function getById($userId)
+    {
+       return User::findOne(['id' => $userId]);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+    /**
+     * @return bool
+     */
+    public function isCenDogovor()
+    {
+//        var_dump($this->getGroup() == 1);
+        if ($this->getGroup() == 1) {
+            return true;
+        }
+        return false;
+
+    }
+
     /**
      * @param string $email_confirm_token
      * @return static|null
